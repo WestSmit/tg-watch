@@ -21,6 +21,7 @@ options:
   session_name: "ha_tg_watch"
   webhook_url: "http://homeassistant.local:8123/api/webhook/tg_watch"
   keywords_regex: ""
+  log_level: "INFO"
 schema:
   api_id: int
   api_hash: str
@@ -32,3 +33,9 @@ schema:
   channels:
     - str
   keywords_regex: str?
+  log_level:
+    - "INFO"
+    - "DEBUG"
+    - "WARNING"
+    - "ERROR"
+    - "CRITICAL"
