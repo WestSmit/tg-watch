@@ -4,10 +4,7 @@ slug: "tgwatch"
 description: "Watch Telegram channels and send webhook to HA when keyword is found"
 arch:
   - aarch64
-  - armv7
-  - armhf
   - amd64
-  - i386
 startup: services
 boot: auto
 init: false
@@ -33,9 +30,4 @@ schema:
   channels:
     - str
   keywords_regex: str?
-  log_level:
-    - "INFO"
-    - "DEBUG"
-    - "WARNING"
-    - "ERROR"
-    - "CRITICAL"
+  log_level: list(INFO|DEBUG|WARNING|ERROR|CRITICAL)
