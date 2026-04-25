@@ -1,0 +1,34 @@
+name: "TG Watch (Mirgorod)"
+version: "1.0.0"
+slug: "tgwatch"
+description: "Watch Telegram channels and send webhook to HA when keyword is found"
+arch:
+  - aarch64
+  - armv7
+  - armhf
+  - amd64
+  - i386
+startup: services
+boot: auto
+init: false
+hassio_api: false
+homeassistant_api: false
+map:
+  - config:rw
+options:
+  api_id: 0
+  api_hash: ""
+  session_name: "ha_tg_watch"
+  webhook_url: "http://homeassistant.local:8123/api/webhook/tg_watch"
+  keywords_regex: ""
+schema:
+  api_id: int
+  api_hash: str
+  session_name: str
+  string_session: str
+  webhook_url: str
+  keywords:
+    - str
+  channels:
+    - str
+  keywords_regex: str?
