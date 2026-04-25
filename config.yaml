@@ -1,4 +1,4 @@
-name: "TG Watch (Mirgorod)"
+name: "TG Watch"
 version: "1.0.0"
 slug: "tgwatch"
 description: "Watch Telegram channels and send webhook to HA when keyword is found"
