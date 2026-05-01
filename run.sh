@@ -11,8 +11,8 @@ STRING_SESSION=$(python -c 'import json; print(json.load(open("'"$CONFIG_PATH"'"
 KEYWORDS_JSON=$(python -c 'import json; print(json.dumps(json.load(open("'"$CONFIG_PATH"'")).get("keywords", []), ensure_ascii=False))')
 CHANNELS_JSON=$(python -c 'import json; print(json.dumps(json.load(open("'"$CONFIG_PATH"'")).get("channels", []), ensure_ascii=False))')
 MATCH_REGEX=$(python -c 'import json; c=json.load(open("'"$CONFIG_PATH"'")); print(c.get("match_regex", c.get("keywords_regex", "")))')
-SKIP_REGEX=$(python -c 'import json; print(json.load(open("'"$CONFIG_PATH"'"")).get("skip_regex",""))')
-HA_EVENT_TYPE=$(python -c 'import json; print(json.load(open("'"$CONFIG_PATH"'"")).get("ha_event_type",""))')
+SKIP_REGEX=$(python -c 'import json; print(json.load(open("'"$CONFIG_PATH"'")).get("skip_regex",""))')
+HA_EVENT_TYPE=$(python -c 'import json; print(json.load(open("'"$CONFIG_PATH"'")).get("ha_event_type",""))')
 LOG_LEVEL=$(python -c 'import json; print(json.load(open("'"$CONFIG_PATH"'")).get("log_level",""))')
 
 export TG_STRING_SESSION="$STRING_SESSION"

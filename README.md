@@ -21,8 +21,8 @@ It is designed for “always-on” monitoring with simple configuration from the
 {
   "channel": "@controlpoltava",
   "text": "…matched message text…",
-  "link": "https://t.me/controlpoltava/12345",
-  "match": "kw:мирго��од"
+  "link": "https://t.me/sometgchannel/12345",
+  "match": "kw:mykeyword"
 }
 ```
 
