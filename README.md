@@ -11,6 +11,72 @@ It is designed for “always-on” monitoring with simple configuration from the
 - **Anti-spam / rate limiting** (deduplicates repeated matches within a configurable time window)
 - **Detailed logging**, including **HTTP status + response body** when the webhook fails
 
+## Installation
+
+### 1. Add the repository to Home Assistant
+
+1. In Home Assistant go to **Settings → Apps(Add-ons) → Install app(Add-on Store)**.
+2. Click the **⋮** menu (top right) and choose **Repositories**.
+3. Add the repository URL:
+   ```
+   https://github.com/WestSmit/ha-apps
+   ```
+4. Click **Add**, then close the dialog.
+5. Refresh the page — **TG Watch** will appear in the store.
+6. Click **Install**.
+
+### 2. Get a Telegram StringSession (one-time, on your PC)
+
+The add-on cannot ask for a phone/code interactively, so you must generate a session string once on your own machine:
+
+```bash
+pip install telethon
+python - <<'EOF'
+from telethon.sync import TelegramClient
+from telethon.sessions import StringSession
+
+api_id   = 123456                          # your api_id from my.telegram.org
+api_hash = "0123456789abcdef..."           # your api_hash
+
+with TelegramClient(StringSession(), api_id, api_hash) as client:
+    print(client.session.save())
+EOF
+```
+
+Copy the printed string — this is your `string_session`.
+
+### 3. Get Telegram API credentials
+
+1. Go to [https://my.telegram.org](https://my.telegram.org) and log in.
+2. Open **API development tools**.
+3. Create an application (any name/platform).
+4. Copy `api_id` (number) and `api_hash` (hex string).
+
+### 4. Configure the add-on
+
+Open the add-on **Configuration** tab and fill in:
+
+| Field | Description |
+|---|---|
+| `api_id` | From my.telegram.org |
+| `api_hash` | From my.telegram.org |
+| `string_session` | Generated in step 2 |
+| `channels` | List of channel usernames (without @) |
+| `keywords` | Words to match (plain substring match) |
+| `match_regex` | Regex to match (overrides keywords if set) |
+| `skip_regex` | Regex — messages matching this are ignored |
+| `webhook_url` | Your HA webhook URL |
+| `ha_event_type` | Optional custom event name (e.g. `tg_watch_event`) |
+| `log_level` | `INFO` recommended |
+
+### 5. Start the add-on
+
+Click **Start**. Check the **Log** tab — you should see:
+
+```
+Connected. Waiting for messages...
+```
+
 ## How it works
 1. You provide Telegram API credentials and a **StringSession** (one-time login generated on your PC).
 2. The add-on connects to Telegram, listens to configured channels, and checks new posts.
