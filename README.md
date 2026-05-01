@@ -15,6 +15,10 @@ It is designed for “always-on” monitoring with simple configuration from the
 
 ### 1. Add the repository to Home Assistant
 
+[![Add repository](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/WestSmit/ha-apps)
+
+Or manually:
+
 1. In Home Assistant go to **Settings → Apps(Add-ons) → Install app(Add-on Store)**.
 2. Click the **⋮** menu (top right) and choose **Repositories**.
 3. Add the repository URL:
@@ -24,6 +28,7 @@ It is designed for “always-on” monitoring with simple configuration from the
 4. Click **Add**, then close the dialog.
 5. Refresh the page — **TG Watch** will appear in the store.
 6. Click **Install**.
+
 
 ### 2. Get a Telegram StringSession (one-time, on your PC)
 
