@@ -27,6 +27,7 @@ export TG_SKIP_REGEX="$SKIP_REGEX"
 export TG_HA_EVENT_TYPE="$HA_EVENT_TYPE"
 export SUPERVISOR_TOKEN="${SUPERVISOR_TOKEN:-}"
 export LOG_LEVEL="$LOG_LEVEL"
+export PYTHONPATH="/app${PYTHONPATH:+:$PYTHONPATH}"
 
 # Session file will be stored in /config/tgwatch via mapped config
 mkdir -p /config/tgwatch
