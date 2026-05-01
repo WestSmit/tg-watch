@@ -19,7 +19,7 @@ It is designed for “always-on” monitoring with simple configuration from the
 ## Payload example
 ```json
 {
-  "channel": "@controlpoltava",
+  "channel": "@sometgchannel",
   "text": "…matched message text…",
   "link": "https://t.me/sometgchannel/12345",
   "match": "kw:mykeyword"
@@ -37,6 +37,70 @@ Configure in the add-on UI:
 - `ha_event_type` (optional; fire a HA event with this event type for each match)
 - `webhook_url`
 - optional rate limit settings (e.g. `DEDUP_WINDOW_SEC`)
+
+## Simple examples (sample data)
+
+### Add-on options example
+
+```yaml
+api_id: 123456
+api_hash: 0123456789abcdef0123456789abcdef
+string_session: YOUR_STRING_SESSION_HERE
+channels:
+  - sample_channel_one
+  - sample_channel_two
+keywords:
+  - discount
+  - launch
+match_regex: '\\b(?:urgent|breaking|announcement)\\b'
+skip_regex: '(?i)subscribe|promo|sponsored'
+ha_event_type: tg_watch_event
+webhook_url: http://homeassistant.local:8123/api/webhook/tg_watch
+log_level: INFO
+```
+
+### Home Assistant automation (event trigger)
+
+```yaml
+alias: TG Watch Notify
+description: Sample automation for TG Watch custom event
+triggers:
+  - trigger: event
+    event_type: tg_watch_event
+conditions: []
+actions:
+  - action: persistent_notification.create
+    data:
+      title: Telegram match
+      message: |-
+        {{ trigger.event.data.text }}
+
+        {{ trigger.event.data.link }}
+mode: parallel
+```
+
+### Home Assistant automation (webhook trigger)
+
+```yaml
+alias: TG Watch Webhook Notify
+description: Sample automation for TG Watch webhook
+triggers:
+  - trigger: webhook
+    webhook_id: tg_watch
+    allowed_methods:
+      - POST
+    local_only: true
+conditions: []
+actions:
+  - action: persistent_notification.create
+    data:
+      title: Telegram match
+      message: |-
+        {{ trigger.json.text }}
+
+        {{ trigger.json.link }}
+mode: parallel
+```
   
 ## Notes
 
