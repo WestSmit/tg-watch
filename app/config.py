@@ -43,8 +43,6 @@ def load_config_from_env() -> AppConfig:
         raise RuntimeError("TG_API_ID is required")
     if not api_hash:
         raise RuntimeError("TG_API_HASH is required")
-    if not webhook_url:
-        raise RuntimeError("HA_WEBHOOK_URL is required")
     if not string_session:
         raise RuntimeError("TG_STRING_SESSION is empty. Set string_session in the add-on configuration.")
 

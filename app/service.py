@@ -16,7 +16,7 @@ class TelegramWatchService:
         config: AppConfig,
         logger: logging.Logger,
         matcher: MessageMatcher,
-        webhook: WebhookClient,
+        webhook: WebhookClient | None,
         ha_event_client: HomeAssistantEventClient | None,
         dedup: DedupCache,
     ) -> None:
@@ -81,9 +81,12 @@ class TelegramWatchService:
                 "match": tag,
             }
 
-            self.logger.info("MATCH in %s (tag=%s); sending webhook. link=%s", channel_ref, tag, link or "(no link)")
-            response = self.webhook.post(payload)
-            self.logger.info("Webhook sent successfully. status=%s", getattr(response, "status_code", "?"))
+            if self.webhook:
+                self.logger.info("MATCH in %s (tag=%s); sending webhook. link=%s", channel_ref, tag, link or "(no link)")
+                response = self.webhook.post(payload)
+                self.logger.info("Webhook sent successfully. status=%s", getattr(response, "status_code", "?"))
+            else:
+                self.logger.info("MATCH in %s (tag=%s); webhook not configured, skipping. link=%s", channel_ref, tag, link or "(no link)")
 
             if self.ha_event_client and self.ha_event_client.enabled():
                 event_data = dict(payload)

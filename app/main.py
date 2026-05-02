@@ -17,7 +17,7 @@ def main() -> None:
         skip_regex=config.skip_regex,
     )
     dedup = DedupCache(config.dedup_window_sec, config.dedup_max_entries)
-    webhook = WebhookClient(config.webhook_url, logger)
+    webhook = WebhookClient(config.webhook_url, logger) if config.webhook_url else None
     ha_event_client = None
     if config.ha_event_type:
         ha_event_client = HomeAssistantEventClient(
